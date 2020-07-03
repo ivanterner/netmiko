@@ -16,9 +16,11 @@ hostname_list = ["sw1", "sw10", "sw11",
 username = input("Username:")
 password = getpass.getpass()
 #enable_pass = getpass.getpass(prompt='Enter enable password:')
-command = input("Please raw command:")
+command = ["no logging console"]
 
 for ip in hostname_list:
     device = ConnectHandler(device_type='cisco_ios', ip=ip, username=username, password=password)
-    output = device.send_command(command)
+    output = device.send_config_set(command)
+    print(output)
+    output = device.send_command("write")
     print(output)
