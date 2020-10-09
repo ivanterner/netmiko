@@ -14,7 +14,7 @@ print(hostname_list)
 username = input("Username:")
 password = getpass.getpass()
 #enable_pass = getpass.getpass(prompt='Enter enable password:')
-command = ["ip name-server 172.16.10.2"]
+command = ["ip name-server 172.16.10.3"]
 
 for ip in hostname_list:
     print(ip)
