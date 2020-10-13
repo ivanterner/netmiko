@@ -1,5 +1,6 @@
 #!/usr/bin/env  python3
 
+import os
 import getpass
 from netmiko import ConnectHandler
 
@@ -11,17 +12,22 @@ def get_hosts():
         item=item.strip()
         hostname_list.append(item)
     file.close()
-    print(hostname_list)
     return hostname_list
 
+def get_username():
+    username = os.getlogin()
+    return username
 
-hosts = get_hosts()
-print(hosts)
-username = input("Username:")
-password = getpass.getpass()
-#enable_pass = getpass.getpass(prompt='Enter enable password:')
+def get_password():
+    password = getpass.getpass()
+    return password
+
+
+
 command = input("Please raw command:")
-
+hosts = get_hosts()
+username = get_username()
+password = get_password()
 for ip in hosts:
     print(ip)
     device = ConnectHandler(device_type='cisco_ios', ip=ip, username=username, password=password, verbose=1, auth_timeout=5)
