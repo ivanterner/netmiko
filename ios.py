@@ -2,6 +2,7 @@
 
 import os
 import getpass
+from termcolor import cprint
 from netmiko import ConnectHandler
 
 
@@ -21,6 +22,7 @@ def get_username():
 def get_password():
     password = getpass.getpass()
     return password
+    
 
 
 
@@ -29,7 +31,7 @@ hosts = get_hosts()
 username = get_username()
 password = get_password()
 for ip in hosts:
-    print(ip)
+    cprint(ip , 'green')
     device = ConnectHandler(device_type='cisco_ios', ip=ip, username=username, password=password, verbose=1, auth_timeout=5)
     output = device.send_command(command)
-    print(output)
+    cprint(output, 'blue')
