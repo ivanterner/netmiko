@@ -1,0 +1,6 @@
+object network TEST
+host 172.16.10.10
+nat (interconnect,outside) static interface service tcp 8000 8000
+exit
+access-list outside_access_in extended permit tcp any object TEST eq 8000
+access-group outside_access_in in interface outside
